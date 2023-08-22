@@ -1,0 +1,37 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% block content %}
+<!-- {% if messages %}
+{% for message in messages %}
+    <script>alert('{{message}}')</script>
+{% endfor %}
+{% endif %} -->
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 style="font-weight: 600; color: #F7990e;">Update Categories</h2>
+    </div>
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for category in category %}
+                    <div class="control-group">
+                        <input type="text" class="form-control" value="{{category.category}}" name="cname"  placeholder="Category name" required/>
+                    </div><br>
+                    <div class="control-group">
+                        <img src="../../static/media/{{category.image}}" alt="" style="width: 50% !important; height: 50% !important;"><br>
+                        <input type="file" name="cimage">
+                    </div><br>
+                    <div>
+                        <button class="btn btn-primary py-2 px-4" type="submit" style="border-radius: 7px;" >Update</button>
+                    </div>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

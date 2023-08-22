@@ -1,0 +1,75 @@
+{% extends 'freelancer/freelancer_dashboard.html' %}
+{% block content %}
+<!-- {% for chats in userchats %}
+{% if chats.message != None %}
+{{chats.message}}<br>
+{% endif %}
+{% if chats.reply != None %}
+{{chats.reply}}<br>
+{% endif %}
+{% endfor %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="text" name="reply">
+    <input type="hidden" name="rid" value="{{request.id}}">
+    <button type="submit">submit</button>
+</form> -->
+
+
+<div class="container-fluid pt-5">
+    
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                {% for chats in userchats %}
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% if chats.message != None %}
+                    <p >{{chats.user_id.name}}</p>
+                    <div class="control-group">
+                        <input type="text" readonly class="form-control" value="{{chats.message}}" name="msge" style="width: 50% !important; margin-left: 0px;"  placeholder="Your Queries here..." required/>
+                        
+                    </div><br>
+                    {% endif %}
+                    {% if chats.reply != None %}
+                    <p style=" margin-left: 350px;">you</p>
+                    <div class="control-group">
+                        <input type="text" readonly class="form-control" value="{{chats.reply}}" name="msge" style="width: 50% !important; margin-left: 350px;"  placeholder="Your Queries here..." required/>
+                        
+                    </div><br>
+                    {% endif %}
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+</div>
+<div class="container-fluid pt-3">
+    <div class="text-center mb-4">
+        <h2 style="font-weight: 600; color: #F7990e;">Reply here...</h2>
+    </div>
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="reply"  placeholder="Your Queries here..." required/>
+                        
+                    </div><br>
+                    <input type="hidden" name="rid" value="{{request.id}}">
+                    <div>
+                        <button class="btn btn-primary py-2 px-4" type="submit" style="border-radius: 7px;" >Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

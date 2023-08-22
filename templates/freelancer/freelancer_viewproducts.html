@@ -1,0 +1,55 @@
+{% extends 'freelancer/freelancer_dashboard.html' %}
+{% block content %}
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-12">
+            <!-- Price Start -->
+            <div class="border-bottom mb-4 pb-4">
+                <h5 class="font-weight-semi-bold mb-4">Filter by Your categories</h5>
+                <a href="/freelancer-viewproducts">All</a><br>
+                {% for category in categories %}
+                <a href="/freelancer-view-catproducts?catid={{category.category_id.id}}">{{category.category_id.category}}</a><br>
+                {% endfor %}
+            </div>
+            
+        </div>
+        <!-- Shop Sidebar End -->
+
+
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-12">
+            <div class="row pb-3">
+                {% for product in products %}
+                {% ifchanged product.category_id.category %}
+                <div class="col-12 pb-1">
+                    <h2 style="font-weight: 600; color: #F7990e; ">{{product.category_id.category}}</h2>
+                </div>
+                {% endifchanged %}
+                
+                <div class="col-lg-4 col-md-6 col-sm-12 pb-1 ">
+                    <div class="card product-item border-0 mb-4">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="../../static/media/{{product.pimage}}" alt="" style="width: 100% !important; height: 200px !important; ">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">{{product.pname}}</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>Rs. {{product.price}}</h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="/freelancer-viewproductdetail?prod={{product.id}}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            <!-- <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+{% endblock %}

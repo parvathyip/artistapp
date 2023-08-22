@@ -1,0 +1,75 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% block content %}
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-12 table-responsive mb-5">
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <th>User</th>
+                        <th>Product</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    {% for cart in carts %}
+                    <tr>
+                        {% ifchanged cart.user_id.id %}
+                        <td class="align-middle">{{cart.user_id.name}}</td>
+                        {% else %}
+                        <td></td>
+                        {% endifchanged %}
+                        <td class="align-middle"><img src="../../static/media/{{cart.product_id.pimage}}" alt="" style="width: 50px;"> <a href="/user-viewproductdetail?prod={{cart.product_id.id}}">{{cart.product_id.pname}}</a><br>
+                            Artist: {{cart.product_id.freelancer_id.f_name}}<br>
+                            Quantity:{{cart.qty}}<br>
+                            Payment Type: {{cart.pay_type}}<br>
+                            Price:{{cart.product_id.price}}<br>
+                            <b>Subtotal:{{cart.total}}</b><br>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-12 table-responsive mb-5">
+            <h4><b>Customized Purchases</b></h4><br>
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <th>User</th>
+                        <th>Product Details</th>
+                        <th>Freelancer Details</th>
+                        <th>Payment Details</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    {% for request in requests %}
+                    <tr>
+                        {% ifchanged cart.user_id.id %}
+                        <td class="align-middle">{{request.user_id.name}}</td>
+                        {% else %}
+                        <td></td>
+                        {% endifchanged %}
+                        <td class="align-middle"><img src="../../static/media/{{request.requestimage}}" alt="" style="width: 50px;"> <br>
+                            {{request.requestdesc}}<br>
+                            {{request.requestsize}}<br>
+                        </td>
+                        <td class="align-middle">{{request.freelancer_id.f_name}}<br>
+                            Experience: {{request.freelancer_id.experience}}Years<br>
+                            {{request.freelancer_id.email}}<br>
+                        </td>
+                        <td class="align-middle">Total: <b>Rs. {{request.requestprice}}</b><br>
+                            Payment type: {{request.payment_type}}<br>
+                            Payment Date: {{request.payment_date}}<br>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

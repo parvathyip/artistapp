@@ -1,0 +1,64 @@
+{% extends 'freelancer/freelancer_dashboard.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+    <script>alert('{{message}}')</script>
+{% endfor %}
+{% endif %}
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 style="font-weight: 600; color: #F7990e;">Add Your Categories</h2>
+    </div>
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for category in categories %}
+                    <div class="form-check">
+                        <input class="form-check-input" name="cats" type="checkbox" value="{{category.id}}" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          {{category.category}}
+                        </label>
+                    </div>
+                    {% endfor %}
+                    <div>
+                        <button class="btn btn-primary py-2 px-4" type="submit" style="border-radius: 7px;" >Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 style="font-weight: 600; color: #F7990e;">Your Categories</h2>
+    </div>
+    {% for current in current %}
+    {{current.categories}}
+    {% endfor %}
+    <div class="row px-xl-5 pb-3">
+        
+        {% for category in fcategories %}
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="card product-item border-0 mb-4" >
+                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                    <img class="img-fluid w-100" src="../../static/media/{{category.category_id.image}}" style="width: 100% !important; height: 200px !important; " alt="">
+                </div>
+                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                    <h6 class="text-truncate mb-3">{{category.category_id.category}}</h6>
+                </div>
+                <div class="card-footer d-flex justify-content-between bg-light border">
+                    <!-- <a href="/admin-update-category?catid={{category.id}}" class="btn btn-sm text-dark p-0">Update</a>
+                    <a href="/admin-delete-category?catid={{category.id}}" class="btn btn-sm text-dark p-0">Delete</a> -->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+   
+</div>
+{% endblock %}

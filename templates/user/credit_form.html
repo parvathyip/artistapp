@@ -1,0 +1,35 @@
+{% extends 'user/user_dashboard.html' %}
+{% block content %}
+
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 style="font-weight: 600; color: #F7990e;">Credit/Debit Card</h2>
+    </div>
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="cholder"  placeholder="Card Holder Name" required/>
+                        
+                    </div><br>
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="cvv"  placeholder="Enter CVV" required/>
+                        
+                    </div><br>
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="expdate"  placeholder="Enter Expire Date" required/>
+                        
+                    </div><br>
+                    <div>
+                        <button class="btn btn-primary py-2 px-4" type="submit" style="border-radius: 7px;" >Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

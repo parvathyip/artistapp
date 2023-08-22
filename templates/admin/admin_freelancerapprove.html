@@ -1,0 +1,47 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% block content %}
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-12 table-responsive mb-5">
+            <form action="" method="post">
+                {% csrf_token %}
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Fullname</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Experience</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Pin</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for freelancer in freelancers %}
+                  <tr>
+                    
+                    <td>{{freelancer.f_name}}</td>
+                    <td>{{freelancer.phone}}</td>
+                    <td>{{freelancer.email}}</td>
+                    <td>{{freelancer.experience}} Year</td>
+                    <td>{{freelancer.address}}</td>
+                    <td>{{freelancer.pin}}</td>
+                    <td>Inactive</td>
+                    <td><div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="approves" value="{{freelancer.id}}" id="flexCheckDefault">
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <div>
+                <button class="btn btn-primary py-2 px-4 ml-3" type="submit" style="border-radius: 7px;">Approve Selected</button>
+            </div> 
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

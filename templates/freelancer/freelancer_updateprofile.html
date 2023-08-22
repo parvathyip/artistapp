@@ -1,0 +1,51 @@
+{% extends 'freelancer/freelancer_dashboard.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+    <script>alert('{{message}}')</script>
+{% endfor %}
+{% endif %}
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 style="font-weight: 600; color: #F7990e;">Update Profile</h2>
+    </div>
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <input type="text" class="form-control" value="{{fdata.f_name}}" name="fullname"  placeholder="Full name" required/>
+                        
+                    </div><br>
+                    <div class="control-group">
+                        <input type="text" class="form-control" value="{{fdata.phone}}" name="phone"  placeholder="Phone" required  />
+                    
+                    </div><br>
+                    <div class="control-group">
+                        <input type="email" class="form-control" value="{{fdata.email}}" name="email"  placeholder="Email" required/>
+                        
+                    </div><br>
+                    <div class="control-group">
+                        <input type="text" class="form-control" value="{{fdata.experience}}" name="exp"  placeholder="Years of Experience" required  />
+                    
+                    </div><br>
+                    <div class="control-group">
+                        <textarea class="form-control" rows="6" name="address" placeholder="Address"
+                            required >{{fdata.address}}</textarea>
+                    </div><br>
+                    <div class="control-group">
+                        <input type="text" class="form-control" value="{{fdata.pin}}" name="pin"  placeholder="Pin" required  />
+                    
+                    </div><br>
+                    <div>
+                        <button class="btn btn-primary py-2 px-4" type="submit" style="border-radius: 7px;" >Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

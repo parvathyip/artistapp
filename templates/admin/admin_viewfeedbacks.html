@@ -1,0 +1,51 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% block content %}
+
+
+<div class="container">
+  <table class="table" style="border-collapse: collapse;margin-top: 50px;">
+    <thead >
+        <tr>
+            <th style="border: none; padding: 8px;">Product</th>
+            <th style="border: none; padding: 8px;">Feedbacks</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for feedback in products %}
+        <tr scope="row">
+            <td style=" padding: 8px;">
+                <img src="../../static/media/{{feedback.pimage}}" alt="" style="width: 300px; height: 150px;"
+                    class="img-fluid product-image"><br>
+                Category: {{feedback.category_id.category}}<br>
+                Pname: {{feedback.pname}}<br>
+                Price: Rs.{{feedback.price}}<br>
+                Size: {{feedback.p_size}}<br>
+                Freelancer Name: {{feedback.freelancer_id.f_name}}<br>
+                Phone: {{feedback.freelancer_id.phone}}<br>
+                Email: {{feedback.freelancer_id.email}}
+            </td>
+            <td style=" padding: 8px;">
+                
+                    {% for feed in feedbacks %}
+                    {% if feedback.id == feed.product_id_id %}
+                    
+                        <b><img src="" alt=""><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>&nbsp;{{feed.user_id.name}}</b><br>
+                        
+
+                       <small> Reviewed on: {{feed.feedback_date}}</small><br>
+                        <i> {{feed.review_text}}</i><br><br>
+                    
+                    {% endif %}
+                    {% endfor %}
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+{% endblock %}

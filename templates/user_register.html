@@ -1,0 +1,96 @@
+{% extends 'index.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+    <script>alert('{{message}}')</script>
+{% endfor %}
+{% endif %}
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 style="font-weight: 600; color: #F7990e;">Users Registration</h2>
+    </div>
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="fullname"  placeholder="Full name" required/>
+                        
+                    </div><br>
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="phone"  placeholder="Phone" required  />
+                    
+                    </div><br>
+                    <div class="control-group">
+                        <input type="email" class="form-control" name="email"  placeholder="Email" required/>
+                        
+                    </div><br>
+                    
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="uname"  placeholder="User name" required/>
+                        
+                    </div><br>
+                    <div class="control-group">
+                        <input type="password" class="form-control" name="pwd"  placeholder="Password" required  />
+                    
+                    </div><br>
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="housename"  placeholder="House name" required/>
+                        
+                    </div><br>
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="place"  placeholder="Place" required  />
+                    
+                    </div><br>
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="city"  placeholder="City" required  />
+                    
+                    </div><br>
+                    <select name="district" class="form-select" aria-label="Default select example" style="display: block;
+                      width: 100%;
+                      height: calc(1.5em + 0.75rem + 2px);
+                      padding: 0.375rem 0.75rem;
+                      font-size: 1rem;
+                      font-weight: 400;
+                      line-height: 1.5;
+                      color: #495057;
+                      background-color: #fff;
+                      background-clip: padding-box;
+                      border: 1px solid #EDF1FF;
+                      border-radius: 0;
+                      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;">
+                        <option selected style="color: #495057;">Choose your District</option>
+                        
+                        <option  value="Tvm">Tvm</option>
+                        <option  value="Kollam">Kollam</option>
+                        <option  value="Patanamthitta">Patanamthitta</option>
+                        <option  value="Alappuzha">Alappuzha</option>
+                        <option  value="Kottayam">Kottayam</option>
+                        <option  value="Idukki">Idukki</option>
+                        <option  value="Ernakulam">Ernakulam</option>
+                        <option  value="Thrissure">Thrissure</option>
+                        <option  value="Palakkad">Palakkad</option>
+                        <option  value="Malappuram">Malappuram</option>
+                        <option  value="Kozhikode">Kozhikode</option>
+                        <option  value="Wayanad">Wayanad</option>
+                        <option  value="Kannur">Kannur</option>
+                        <option  value="Kasargod">Kasargod</option>
+                       
+                      </select><br>
+                      
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="pin"  placeholder="Pin" required  />
+                    
+                    </div><br>
+                    <div>
+                        <button class="btn btn-primary py-2 px-4" type="submit" style="border-radius: 7px;" >Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

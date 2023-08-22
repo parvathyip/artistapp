@@ -1,0 +1,57 @@
+{% extends 'user/user_dashboard.html' %}
+{% block content %}
+<div class="container-fluid pt-5">
+    
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                {% for chat in chats %}
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% if chat.message != None %}
+                    <p style=" margin-left: 350px;">you</p>
+                    <div class="control-group">
+                        <input type="text" readonly class="form-control" value="{{chat.message}}" name="msge" style="width: 50% !important; margin-left: 350px;"  placeholder="Your Queries here..." required/>
+                        
+                    </div><br>
+                    {% endif %}
+                    {% if chat.reply != None %}
+                    <p>{{chat.freelancer_id.f_name}}</p>
+                    <div class="control-group">
+                        <input type="text" readonly class="form-control" value="{{chat.reply}}" name="msge" style="width: 50% !important; margin-left: 0px;"  placeholder="Your Queries here..." required/>
+                        
+                    </div><br>
+                    {% endif %}
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+</div>
+<div class="container-fluid pt-3">
+    <div class="text-center mb-4">
+        <h2 style="font-weight: 600; color: #F7990e;">Chat here...</h2>
+    </div>
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="msge"  placeholder="Your Queries here..." required/>
+                        
+                    </div><br>
+                    <div>
+                        <button class="btn btn-primary py-2 px-4" type="submit" style="border-radius: 7px;" >Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

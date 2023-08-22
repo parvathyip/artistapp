@@ -1,0 +1,81 @@
+{% extends 'user/user_dashboard.html' %}
+{% block content %}
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-12 table-responsive mb-5">
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <th>Product</th>
+                        <th>Order Date</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Payment Type</th>
+                        <th>Payment Date</th>
+                        <th>Feedback</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    {% for cart in carts %}
+                    <tr>
+                        <td class="align-middle"><img src="../../static/media/{{cart.product_id.pimage}}" alt="" style="width: 50px;"> <a href="/user-viewproductdetail?prod={{cart.product_id.id}}">{{cart.product_id.pname}}</a></td>
+                        <td class="align-middle">{{cart.order_date}}</td>
+                        <td class="align-middle">Rs. {{cart.product_id.price}}</td>
+                        <td class="align-middle">{{cart.qty}}</td>
+                        <td class="align-middle">{{cart.total}}</td>
+                        <td class="align-middle">{{cart.pay_type}}</td>
+                        <td class="align-middle">{{cart.payment_date}}</td>
+                        {% if cart.feedback_id  %}
+                        <td class="align-middle">{{cart.feedback_id.review_text}}
+                            <!-- <a href="/user-updatereview?cartid={{cart.id}}" class="btn btn-primary py-2 px-4" style="border-radius: 7px;">Update</a></td> -->
+                        {% else %}
+                        <td><a href="/user-addreview?cartid={{cart.id}}" class="btn btn-primary py-2 px-4" style="border-radius: 7px;">Add Review</a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-12 table-responsive mb-5">
+            <h4><b>Your Customized Products</b></h4><br>
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <th>Product Details</th>
+                        <th>Freelancer Details</th>
+                        <th>Payment Details</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    {% for request in requests %}
+                    <tr>
+                        <td class="align-middle"><img src="../../static/media/{{request.requestimage}}" alt="" style="width: 50px;"> <br>
+                            {{request.requestdesc}}<br>
+                            {{request.requestsize}}
+                        </td>
+                        <td class="align-middle">{{request.freelancer_id.f_name}}<br>
+                            Experience: {{request.freelancer_id.experience}}Years<br>
+                            {{request.freelancer_id.email}}<br>
+                        </td>
+                        <td class="align-middle">Total: <b>Rs. {{request.requestprice}}</b><br>
+                            Payment type: {{request.payment_type}}<br>
+                            Payment Date: {{request.payment_date}}<br>
+                        </td>
+                        
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

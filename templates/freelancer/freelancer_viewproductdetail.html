@@ -1,0 +1,91 @@
+{% extends 'freelancer/freelancer_dashboard.html' %}
+{% block content %}
+<div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-5 pb-5">
+            <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner border">
+                    <div class="carousel-item active">
+                        <img class="w-100 h-100" src="../../static/media/{{product.pimage}}"  alt="Image">
+                    </div>
+                    
+                </div>
+               
+            </div>
+        </div>
+
+        <div class="col-lg-7 pb-5">
+            <h3 class="font-weight-semi-bold mb-3">{{product.pname}}</h3>
+           
+            <h3 class="font-weight-semi-bold mb-4">Rs. {{product.price}}</h3>
+            <p class="mb-4">One of our popular best sale product...</p>
+            
+            <div class="d-flex mb-4">
+                <p class="text-dark font-weight-medium mb-0 mr-3">Category:</p>
+                <label class="" for="color-1">{{product.category_id.category}}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <p class="text-dark font-weight-medium mb-0 mr-3">Size:</p>
+                <label class="" for="color-1">{{product.p_size}}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <p class="text-dark font-weight-medium mb-0 mr-3">Ownership by:</p>
+                <label class="" for="color-1">{{product.freelancer_id.f_name}}</label>
+            </div>
+            <!-- <div class="d-flex pt-2">
+                <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
+                <div class="d-inline-flex">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-pinterest"></i>
+                    </a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="nav nav-tabs justify-content-center border-secondary mb-4">
+                <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews</a>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab-pane-1">
+                    <h4 class="mb-3">Product Description</h4>
+                    <p>One of our popular best sale product...</p>
+                    <p><b>Ownership Details...</b></p>
+                    <p>Name: {{product.freelancer_id.f_name}}</p>
+                    <p>Email: {{product.freelancer_id.email}}</p>
+                    <p>Experience: {{product.freelancer_id.experience}} Years</p>
+                </div>
+               
+                <div class="tab-pane fade" id="tab-pane-3">
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <h4 class="mb-4">Review for "{{product.pname}}"</h4>
+                            {% for feedbacks in feedbacks %}
+                            <div class="media mb-4">
+                                <div class="media-body">
+                                    <h6>{{feedbacks.user_id.name}}<small> - <i>{{feedbacks.feedback_date}}</i></small></h6>
+                                    
+                                    <p>{{feedbacks.review_text}}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,225 @@
+{% extends 'user/user_dashboard.html' %}
+{% block content %}
+<style>
+    .chat-button {
+    border-radius: 7px;
+    padding: 5px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}
+
+.chat-button:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+</style>
+{% if messages %}
+{% for message in messages %}
+    <script>alert('{{message}}')</script>
+{% endfor %}
+{% endif %}
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-12 table-responsive mb-5">
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <th>Request Details</th>
+                        <th>Freelancer Details</th>
+                        <th>Freelancer Update</th>
+                        <!-- <th>Image</th>
+                    
+                        <th>Description</th>
+                        <th>Size</th>
+                        <th>Expected</th> -->
+                        <!-- <th>Price</th>
+                        <th>Complete date</th> -->
+                        <!-- <th>Freelancer Name</th>
+                        <th>Phone</th> -->
+                        
+                        <th>Request Status</th>
+                        <th>Requirements Action</th>
+                        <th>Chat</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    {% for requests in requests %}
+                    <tr>
+                        <td class="align-middle"><img src="../../static/media/{{requests.requestimage}}" alt="" style="width: 60% !important; height: 100px  !important;"><br>
+                        <!-- <td class="align-middle">{{requests.requestname}}</td> -->
+                        Description: {{requests.requestdesc}}<br>
+                        Size: {{requests.requestsize}} <br>
+                        Expected Date: {{requests.reqexpecteddate}} </td>
+                        
+                        <td class="align-middle">Freelancer Name: {{requests.freelancer_id.f_name}}<br>
+                        Contact: {{requests.freelancer_id.phone}}</td>
+                        <td class="align-middle">Price: {{requests.requestprice}} <br>
+                            Completion Date: {{requests.reqcompletedate}} </td>
+                        <!-- <td class="align-middle">{{requests.freelancer_id.email}}</td> -->
+                        
+                        {% if requests.requeststatus|lower == "completed" %}
+                        <td>{{requests.requeststatus}}<br><a href="/user-payrequest?rid={{requests.id}}" class="btn btn-primary " style="border-radius: 7px; padding: 1px !important;">Pay Now</a>
+                        </td>
+                        {% else %}
+                        <td class="align-middle">{{requests.requeststatus}} by freelancer</td>
+                        {% endif %}
+                        {% if requests.requeststatus|lower == "accepted" and requests.reqrequirestatus|lower == "pending" %}
+                        <td><a href="/user-acceptrequire?rid={{requests.id}}" class="btn btn-primary " style="border-radius: 7px; padding: 1px !important;">Accept require</a>
+                        
+                        <a href="/user-rejectrequire?rid={{requests.id}}" class="btn btn-primary " style="border-radius: 7px; padding: 1px !important;">Reject require</a>
+                        </td>
+                        {% else %}
+                        <td class="align-middle">{{requests.reqrequirestatus}}</td>
+                        {% endif %}
+                        {% if requests.requeststatus|lower == "accepted" and requests.reqrequirestatus|lower == "accepted" %}
+                        <td><a href="/user-freelancerchat?rid={{requests.id}}" class="chat-button">chat</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+
+
+<!-- <div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        
+
+        
+    </div>
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="nav nav-tabs justify-content-center border-secondary mb-4">
+                
+            </div>
+            <div class="tab-content">
+                
+                <div class="">
+                        <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item px-0">
+                                   Image
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Name
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Description
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Size
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Expected Date
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Price
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Completion Date
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Freelancer Name
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                    Freelancer Phone
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Freelancer Email
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Requirement Action
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Request Action
+                                 </li>
+                              </ul> 
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item px-0">
+                                   abc Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Duo amet accusam eirmod nonumy stet et et stet eirmod.
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                </li>
+                              </ul> 
+                        </div>
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item px-0">
+                                   Image
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Name
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Description
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Size
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Expected Date
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Price
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Completion Date
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Freelancer Name
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                    Freelancer Phone
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Freelancer Email
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Requirement Action
+                                 </li>
+                                 <li class="list-group-item px-0">
+                                     Request Action
+                                 </li>
+                              </ul> 
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item px-0">
+                                   abc Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Duo amet accusam eirmod nonumy stet et et stet eirmod.
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                </li>
+                              </ul> 
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div> -->
+{% endblock %}

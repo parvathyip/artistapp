@@ -1,0 +1,111 @@
+{% extends 'user/user_dashboard.html' %}
+{% block content %}
+<style>
+    .category-title {
+        font-weight: 600;
+        color: #F7990e;
+        margin-left: 50px;
+    }
+
+    .product-card {
+        width: 19rem;
+        height: 400px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+    }
+
+    .product-card img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .product-card .card-body {
+        padding: 15px;
+    }
+
+    .product-card .card-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .product-card .card-price {
+        font-size: 16px;
+        font-weight: 500;
+        color: #00b894;
+    }
+
+    .product-card .card-link {
+        display: block;
+        margin-top: 10px;
+        text-decoration: none;
+        color: #000;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    .product-card .card-link:hover {
+        color: #0984e3;
+    }
+
+    .make-request-btn {
+        display: inline-block;
+        background-color: #00b894;
+        color: #fff;
+        padding: 8px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s;
+    }
+
+    .make-request-btn:hover {
+        background-color: #00a86b;
+    }
+    .category-title {
+        margin-top: 20px;
+    }
+    .card-button {
+        text-align: left;
+        margin-left: -15px;
+        margin-bottom: 10px;
+    }
+</style>
+
+
+    
+<div class="container-fluid">
+    {% for product in products %}
+    {% ifchanged product.category_id.category %}
+    <div class="row">
+        <div class="col-12">
+            <h2 class="category-title">{{product.category_id.category}}</h2>
+        </div>
+    </div>
+    {% endifchanged %}
+    {% if forloop.counter0|divisibleby:3 %}
+    <div class="row">
+    {% endif %}
+        <div class="col-4">
+            <div class="product-card my-3 mx-3">
+                <img class="card-img-top" src="../../static/media/{{product.pimage}}" alt="Product Image">
+                <div class="card-body">
+                    <div class="card-button">
+                        <a href="/user-makerequest?fid={{product.freelancer_id.id}}" class="make-request-btn py-2 px-4 mr-2">Make Request</a>
+                    </div>
+                    <h5 class="card-title">{{product.pname}}</h5>
+                    <h5 class="card-price">Rs. {{product.price}}</h5>
+                    <a href="/user-viewproductdetail?prod={{product.id}}" class="card-link">View more</a>
+                </div>
+            </div>
+        </div>
+    {% if forloop.counter|add:1|divisibleby:3 or forloop.last %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'user/user_dashboard.html' %}
+{% block content %}
+
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 style="font-weight: 600; color: #F7990e;">Update Review</h2>
+    </div>
+    <div class="row px-xl-5 ">
+        <div class="col-lg-7 mb-5 mx-auto">
+            <div class="contact-form">
+                <!-- <div id="success"></div> -->
+                <form method="post">
+                    {% csrf_token %}
+                    {% for cart in cartdata %}
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="upreview" value="{{cart.feedback_id.review_text}}" placeholder="You reviews here..." required/>
+                        
+                    </div><br>
+                    {% endfor %}
+                    <div>
+                        <button class="btn btn-primary py-2 px-4" type="submit" style="border-radius: 7px;" >Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
